@@ -1,6 +1,6 @@
-# 且慢 MCP Server
+# 盈米 MCP Server
 
-且慢 MCP Server 是一个基于模型上下文协议（MCP）的智能投资顾问服务，为 AI 助手提供专业的基金分析、资产配置、投资组合诊断等金融服务能力。通过自然语言交互，让投资决策更智能、更高效。
+盈米 MCP Server 是一个基于模型上下文协议（MCP）的智能投资顾问服务，为 AI 助手提供专业的基金分析、资产配置、投资组合诊断等金融服务能力。通过自然语言交互，让投资决策更智能、更高效。
 
 ## 核心能力
 
@@ -183,7 +183,7 @@
 
 **接入地址**：
 
-- **Streamable HTTP**：`https://stargate.yingmi.com/mcp/v2`（鉴权使用请求头 `**x-api-key`**，并建议设置 `**Accept: application/json, text/event-stream`**）
+- **Streamable HTTP**：`https://stargate.yingmi.com/mcp/v2`（鉴权使用请求头 **`x-api-key`**，并建议设置 **`Accept: application/json, text/event-stream`**）
 - **SSE**：`https://stargate.yingmi.com/mcp/sse?apiKey=your-api-key-here`（将 `your-api-key-here` 替换为您的真实 API Key）
 
 > **以账户页为准**：[且慢 MCP 账户页](https://qieman.com/mcp/account) 会展示与您账号对应的接入方式与完整 URL；**若页面与本文示例不一致，请以账户页为准。**
@@ -226,7 +226,7 @@ Claude Desktop 仅支持本地 stdio 时，需使用 **Node.js / npm** 运行 `m
 
 #### 方式 B：Streamable HTTP + mcp-remote（可选）
 
-若您使用的 `mcp-remote` 版本支持 Streamable HTTP，可使用 `**/mcp/v2`** 并通过请求头传递 API Key（与 Cursor 等方式一致）：
+若您使用的 `mcp-remote` 版本支持 Streamable HTTP，可使用 **`/mcp/v2`** 并通过请求头传递 API Key（与 Cursor 等方式一致）：
 
 ```json
 {
@@ -298,7 +298,7 @@ Claude Desktop 仅支持本地 stdio 时，需使用 **Node.js / npm** 运行 `m
 
 #### Cherry Studio
 
-**Streamable HTTP**：在连接类型中选择 **HTTP / Streamable HTTP**（名称以软件为准），服务器地址填 `https://stargate.yingmi.com/mcp/v2`，并在自定义请求头中设置 `**x-api-key`**（值为您的 API Key）及 `**Accept: application/json, text/event-stream`**（若软件支持填写 headers）。
+**Streamable HTTP**：在连接类型中选择 **HTTP / Streamable HTTP**（名称以软件为准），服务器地址填 `https://stargate.yingmi.com/mcp/v2`，并在自定义请求头中设置 **`x-api-key`**（值为您的 API Key）及 **`Accept: application/json, text/event-stream`**（若软件支持填写 headers）。
 
 **SSE**：
 
@@ -397,4 +397,4 @@ MIT License
 
 ---
 
-**由盈米且慢提供专业金融数据支持**
+**由盈米提供专业金融数据支持**

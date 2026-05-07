@@ -1,6 +1,6 @@
-# Qieman Investment Advisory MCP Server
+# Yingmi Investment Advisory MCP Server
 
-Qieman Investment Advisory MCP Server is an intelligent investment advisory service based on the Model Context Protocol (MCP), providing AI assistants with professional fund analysis, asset allocation, and portfolio diagnostics capabilities. Make investment decisions smarter and more efficient through natural language interaction.
+Yingmi Investment Advisory MCP Server is an intelligent investment advisory service based on the Model Context Protocol (MCP), providing AI assistants with professional fund analysis, asset allocation, and portfolio diagnostics capabilities. Make investment decisions smarter and more efficient through natural language interaction.
 
 ## Core Capabilities
 
@@ -395,4 +395,4 @@ MIT License
 
 ---
 
-**Powered by Yingmi Qieman Investment Advisory with Professional Financial Data Support**
+**Powered by Yingmi Investment Advisory with Professional Financial Data Support**
