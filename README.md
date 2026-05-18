@@ -1,6 +1,6 @@
 # 盈米 MCP Server
 
-盈米 MCP Server 是一个基于模型上下文协议（MCP）的智能投资顾问服务，为 AI 助手提供专业的基金分析、资产配置、投资组合诊断等金融服务能力。通过自然语言交互，让投资决策更智能、更高效。
+盈米 MCP Server 是一个基于模型上下文协议（MCP）的智能投资顾问服务，为 AI 助手提供专业的基金分析、资产配置、投资组合诊断等金融服务能力。通过自然语言交互，让投资决策更智能、更高效。产品注册、介绍与开放平台入口见 **[盈米 AI开放平台](https://ai.yingmi.com)**；API Key 与接入详情请以平台内控制台为准。
 
 ## 核心能力
 
@@ -170,63 +170,29 @@
 
 ## 快速开始
 
-### 接入方式：云托管（Streamable HTTP / SSE）
+### 接入方式：云托管（Streamable HTTP）
 
-且慢 MCP Server 采用 **云托管模式**，无需本地部署服务端代码。支持两种传输（具体名称以客户端为准）：
+盈米 MCP Server 采用 **云托管模式**，无需本地部署服务端代码。通过 **Streamable HTTP**（MCP 当前推荐的 HTTP 传输；客户端中的具体名称可能略有不同）接入。
 
+**接入地址**：`https://stargate.yingmi.com/mcp/v2`（鉴权使用请求头 **`x-api-key`**，并建议设置 **`Accept: application/json, text/event-stream`**）
 
-| 传输方式                | 说明                                                                    |
-| ------------------- | --------------------------------------------------------------------- |
-| **Streamable HTTP** | MCP 当前推荐的 HTTP 传输；适合已原生支持该传输的客户端（如新版 Cursor）。                         |
-| **SSE**             | 传统 SSE 长连接；兼容面广，**Claude Desktop 等仅支持 stdio 的环境**需通过 `mcp-remote` 桥接。 |
-
-
-**接入地址**：
-
-- **Streamable HTTP**：`https://stargate.yingmi.com/mcp/v2`（鉴权使用请求头 **`x-api-key`**，并建议设置 **`Accept: application/json, text/event-stream`**）
-- **SSE**：`https://stargate.yingmi.com/mcp/sse?apiKey=your-api-key-here`（将 `your-api-key-here` 替换为您的真实 API Key）
-
-> **以账户页为准**：[且慢 MCP 账户页](https://qieman.com/mcp/account) 会展示与您账号对应的接入方式与完整 URL；**若页面与本文示例不一致，请以账户页为准。**
+> **以控制台为准**：[盈米AI开放平台——个人中心](https://ai.yingmi.com/mcp/account) 会展示与您账号对应的接入方式与完整 URL；**若页面与本文示例不一致，请以平台控制台为准。**
 
 ### 步骤 1：获取 API Key
 
-1. 访问 [且慢 MCP 服务页面](https://qieman.com/mcp) 注册账号并了解服务
-2. 登录后打开 [且慢 MCP 账户页](https://qieman.com/mcp/account)，申请并复制 MCP API Key
+1. 打开 [盈米 AI开放平台](https://ai.yingmi.com) 完成注册并了解服务
+2. 登录后在 [盈米AI开放平台——个人中心](https://ai.yingmi.com/mcp/account) 申请并复制 MCP API Key
 3. 妥善保存 API Key（后续配置时需要）
 
-> 💡 **提示**：更多说明与 Key 管理以官网及账户页为准：[https://qieman.com/mcp](https://qieman.com/mcp)
+> 💡 **提示**：更多说明与 Key 管理以 [盈米 AI开放平台](https://ai.yingmi.com) 及 [盈米AI开放平台——个人中心](https://ai.yingmi.com/mcp/account) 为准。
 
 ### 步骤 2：在 Claude Desktop 中配置
 
-Claude Desktop 仅支持本地 stdio 时，需使用 **Node.js / npm** 运行 `mcp-remote` 桥接远程服务。
+Claude Desktop 仅支持本地 stdio 时，需使用 **Node.js / npm** 运行 `mcp-remote`，通过 **Streamable HTTP** 桥接远程服务。
 
-#### 方式 A：SSE + mcp-remote（推荐，兼容性最好）
+#### Streamable HTTP + mcp-remote
 
-在 Claude Desktop 配置文件中添加：
-
-```json
-{
-  "mcpServers": {
-    "qieman": {
-      "command": "npx",
-      "args": [
-        "-y",
-        "mcp-remote",
-        "https://stargate.yingmi.com/mcp/sse?apiKey=your-api-key-here"
-      ]
-    }
-  }
-}
-```
-
-**配置说明**：
-
-- `mcp-remote`：将远程 MCP（SSE）桥接为本地 stdio，供 Claude Desktop 使用
-- URL 中的 `your-api-key-here` 请替换为您的真实 API Key
-
-#### 方式 B：Streamable HTTP + mcp-remote（可选）
-
-若您使用的 `mcp-remote` 版本支持 Streamable HTTP，可使用 **`/mcp/v2`** 并通过请求头传递 API Key（与 Cursor 等方式一致）：
+在 Claude Desktop 配置文件中添加（`mcp-remote` 需支持 Streamable HTTP）：
 
 ```json
 {
@@ -249,7 +215,12 @@ Claude Desktop 仅支持本地 stdio 时，需使用 **Node.js / npm** 运行 `m
 }
 ```
 
-> Windows 版 Claude Desktop 若在 `--header` 中带空格被错误拆分时，可将整段 header 写入环境变量并在 `args` 里引用（参见 `mcp-remote` 文档），或优先使用 **方式 A（SSE）**。若方式 B 出现 OAuth 发现、403 等与鉴权无关的报错，请改回方式 A 或升级 `mcp-remote` 后重试。
+**配置说明**：
+
+- `mcp-remote` 将远程 Streamable HTTP MCP 桥接为本地 stdio，供 Claude Desktop 使用
+- 将 `x-api-key:your-api-key-here` 中的 `your-api-key-here` 替换为您的真实 API Key
+
+> Windows 版 Claude Desktop 若在 `--header` 中带空格被错误拆分时，可将整段 header 写入环境变量并在 `args` 里引用（参见 `mcp-remote` 文档）。若出现 OAuth 发现、403 等与鉴权无关的报错，请升级 `mcp-remote` 至支持 Streamable HTTP 的版本后重试。
 
 ### 步骤 3：在其他 MCP 客户端中使用
 
@@ -259,9 +230,9 @@ Claude Desktop 仅支持本地 stdio 时，需使用 **Node.js / npm** 运行 `m
 
 1. 打开 Cursor，进入**设置**
 2. 打开 **MCP**
-3. **添加 MCP Server**，按需填入下列之一并保存
+3. **添加 MCP Server**，填入下列配置并保存
 
-**Streamable HTTP（推荐）**：
+**Streamable HTTP**：
 
 ```json
 {
@@ -277,48 +248,19 @@ Claude Desktop 仅支持本地 stdio 时，需使用 **Node.js / npm** 运行 `m
 }
 ```
 
-**SSE（备选）**：
-
-```json
-{
-  "mcpServers": {
-    "qieman": {
-      "url": "https://stargate.yingmi.com/mcp/sse?apiKey=your-api-key-here"
-    }
-  }
-}
-```
-
 **配置说明**：
 
-- Streamable HTTP：将 `headers` 中的 `your-api-key-here` 替换为您的实际 API Key；`Accept` 建议保持与上例一致
-- SSE：将 URL 中的 `your-api-key-here` 替换为您的实际 API Key
-- 若 Cursor 提供传输类型选项，请选择 **Streamable HTTP**（或 HTTP）与 **SSE** 中与实际配置对应的一项
+- 将 `headers` 中的 `your-api-key-here` 替换为您的实际 API Key；`Accept` 建议保持与上例一致
+- 若 Cursor 提供传输类型选项，请选择 **Streamable HTTP**（或 HTTP）以匹配上述配置
 - Cursor 下载：[https://www.cursor.com/cn](https://www.cursor.com/cn)
 
 #### Cherry Studio
 
-**Streamable HTTP**：在连接类型中选择 **HTTP / Streamable HTTP**（名称以软件为准），服务器地址填 `https://stargate.yingmi.com/mcp/v2`，并在自定义请求头中设置 **`x-api-key`**（值为您的 API Key）及 **`Accept: application/json, text/event-stream`**（若软件支持填写 headers）。
-
-**SSE**：
-
-1. 打开 Cherry Studio
-2. 连接类型选择：**sse**
-3. 地址：
-
-```
-https://stargate.yingmi.com/mcp/sse?apiKey=your-api-key-here
-```
+在连接类型中选择 **HTTP / Streamable HTTP**（名称以软件为准），服务器地址填 `https://stargate.yingmi.com/mcp/v2`，并在自定义请求头中设置 **`x-api-key`**（值为您的 API Key）及 **`Accept: application/json, text/event-stream`**（若软件支持填写 headers）。
 
 **配置说明**：
 
-- 将 `your-api-key-here` 替换为您的实际 API Key
 - Cherry Studio 下载：[https://cherry-ai.com/](https://cherry-ai.com/)
-
-**推荐配置**（可选）：
-
-- 推荐模型：火山引擎 Deepseek-v3 模型
-- 模型名称：`deepseek-v3-250324`
 
 #### Windsurf / Trae 等其他 IDE
 
@@ -338,19 +280,7 @@ https://stargate.yingmi.com/mcp/sse?apiKey=your-api-key-here
 }
 ```
 
-**SSE**：
-
-```json
-{
-  "mcpServers": {
-    "qieman": {
-      "url": "https://stargate.yingmi.com/mcp/sse?apiKey=your-api-key-here"
-    }
-  }
-}
-```
-
-> ⚠️ **兼容性说明**：不同客户端对 MCP 传输（Streamable HTTP / SSE）的支持不同；**请以客户端文档及 [且慢 MCP 账户页](https://qieman.com/mcp/account) 为准。**
+> ⚠️ **兼容性说明**：不同客户端对 MCP 传输（Streamable HTTP）的支持可能不同；**请以客户端文档及 [盈米 AI开放平台](https://ai.yingmi.com) 控制台信息为准。**
 
 ### 使用示例
 
@@ -374,8 +304,8 @@ https://stargate.yingmi.com/mcp/sse?apiKey=your-api-key-here
 
 ## 技术特点
 
-- **云托管服务**：无需本地部署服务端代码，在客户端配置 **Streamable HTTP** 或 **SSE** 接入地址即可使用
-- **专业可靠**：基于且慢投顾多年积累的金融数据与分析模型
+- **云托管服务**：无需本地部署服务端代码，在客户端配置 **Streamable HTTP** 接入地址即可使用
+- **专业可靠**：基于盈米投顾多年积累的金融数据与分析模型
 - **实时更新**：支持实时获取最新基金净值、公告与市场资讯
 - **智能分析**：结合 AI 能力，提供自然语言交互式投资分析
 - **可视化**：内置图表渲染与报告生成能力，结果一目了然
@@ -393,7 +323,8 @@ MIT License
 ## 联系方式
 
 - 问题反馈: [wangjiaye@yingmi.cn](mailto:wangjiaye@yingmi.cn)
-- 官网地址: [https://qieman.com/mcp](https://qieman.com/mcp)
+- GitHub: [Yingmi-MCP](https://github.com/yingmi-dev/Yingmi-MCP)
+- 开放平台: [盈米 AI开放平台](https://ai.yingmi.com)
 
 ---
 

@@ -1,6 +1,6 @@
 # Yingmi Investment Advisory MCP Server
 
-Yingmi Investment Advisory MCP Server is an intelligent investment advisory service based on the Model Context Protocol (MCP), providing AI assistants with professional fund analysis, asset allocation, and portfolio diagnostics capabilities. Make investment decisions smarter and more efficient through natural language interaction.
+Yingmi Investment Advisory MCP Server is an intelligent investment advisory service based on the Model Context Protocol (MCP), providing AI assistants with professional fund analysis, asset allocation, and portfolio diagnostics capabilities. Make investment decisions smarter and more efficient through natural language interaction. Register, product information, and the open platform home are on the **[Yingmi AI Open Platform](https://ai.yingmi.com)**; API keys and endpoint details follow what you see in the platform console.
 
 ## Core Capabilities
 
@@ -170,61 +170,29 @@ Yingmi Investment Advisory MCP Server is an intelligent investment advisory serv
 
 ## Quick Start
 
-### Access Method: Cloud Hosted (Streamable HTTP / SSE)
+### Access Method: Cloud Hosted (Streamable HTTP)
 
-Qieman Investment Advisory MCP Server uses a **cloud-hosted model**. No local server deployment is required. Two transports are supported (exact labels depend on your client):
+Yingmi Investment Advisory MCP Server uses a **cloud-hosted model**. No local server deployment is required. Connect using **Streamable HTTP** (the recommended HTTP transport in current MCP specs; exact labels may vary by client).
 
-| Transport | Notes |
-| --- | --- |
-| **Streamable HTTP** | Recommended HTTP transport in current MCP specs; use with clients that support it natively (e.g. recent Cursor). |
-| **SSE** | Classic Server-Sent Events; broad compatibility. **Claude Desktop** (stdio-only) should use **`mcp-remote`** as a bridge. |
+**Endpoint**: `https://stargate.yingmi.com/mcp/v2` — authenticate with the **`x-api-key`** request header; set **`Accept`** to **`application/json, text/event-stream`**
 
-**Endpoints**:
-
-- **Streamable HTTP**: `https://stargate.yingmi.com/mcp/v2` — authenticate with the **`x-api-key`** request header; set **`Accept`** to **`application/json, text/event-stream`**
-- **SSE**: `https://stargate.yingmi.com/mcp/sse?apiKey=your-api-key-here` (replace `your-api-key-here` with your real API Key)
-
-> **Source of truth**: The [Qieman MCP account page](https://qieman.com/mcp/account) shows the exact URLs and options for your account. **If anything differs from this document, follow the account page.**
+> **Source of truth**: The [Yingmi AI Open Platform — Personal Center](https://ai.yingmi.com/mcp/account) shows the exact URLs and options for your account. **If anything differs from this document, follow the platform console.**
 
 ### Step 1: Get API Key
 
-1. Visit the [Qieman MCP service page](https://qieman.com/mcp) to register and learn about the product
-2. Sign in and open the [Qieman MCP account page](https://qieman.com/mcp/account) to create or copy your MCP API Key
+1. Open the [Yingmi AI Open Platform](https://ai.yingmi.com) to sign up and learn about the product
+2. Sign in and go to the [Yingmi AI Open Platform — Personal Center](https://ai.yingmi.com/mcp/account) to create or copy your MCP API Key
 3. Store your API Key securely (you will need it in the next steps)
 
-> 💡 **Tip**: For the latest guidance and key management, see [https://qieman.com/mcp](https://qieman.com/mcp) and the account page above.
+> 💡 **Tip**: For the latest guidance and key management, see the [Yingmi AI Open Platform](https://ai.yingmi.com) and the [Yingmi AI Open Platform — Personal Center](https://ai.yingmi.com/mcp/account).
 
 ### Step 2: Configure in Claude Desktop
 
-When Claude Desktop only supports local **stdio**, use **Node.js / npm** to run **`mcp-remote`** against the remote server.
+When Claude Desktop only supports local **stdio**, use **Node.js / npm** to run **`mcp-remote`** with **Streamable HTTP** against the remote server.
 
-#### Option A: SSE + mcp-remote (recommended, best compatibility)
+#### Streamable HTTP + mcp-remote
 
-Add to your Claude Desktop configuration file:
-
-```json
-{
-  "mcpServers": {
-    "qieman": {
-      "command": "npx",
-      "args": [
-        "-y",
-        "mcp-remote",
-        "https://stargate.yingmi.com/mcp/sse?apiKey=your-api-key-here"
-      ]
-    }
-  }
-}
-```
-
-**Configuration notes**:
-
-- `mcp-remote`: bridges remote MCP over **SSE** to local stdio for Claude Desktop
-- Replace `your-api-key-here` in the URL with your real API Key
-
-#### Option B: Streamable HTTP + mcp-remote (optional)
-
-If your `mcp-remote` version supports Streamable HTTP, use **`/mcp/v2`** and pass the API Key in headers (same as Cursor):
+Add to your Claude Desktop configuration file (your `mcp-remote` version must support Streamable HTTP):
 
 ```json
 {
@@ -247,7 +215,12 @@ If your `mcp-remote` version supports Streamable HTTP, use **`/mcp/v2`** and pas
 }
 ```
 
-> On **Windows**, Claude Desktop may mishandle spaces inside `--header` values; use an environment variable in the header value per `mcp-remote` docs, or prefer **Option A (SSE)**. If Option B fails with OAuth discovery, HTTP 403, or similar errors unrelated to an invalid key, switch back to Option A or upgrade `mcp-remote` and try again.
+**Configuration notes**:
+
+- `mcp-remote` bridges the remote Streamable HTTP MCP server to local stdio for Claude Desktop
+- Replace `your-api-key-here` in the `x-api-key` header with your real API Key
+
+> On **Windows**, Claude Desktop may mishandle spaces inside `--header` values; use an environment variable in the header value per `mcp-remote` docs. If you see OAuth discovery, HTTP 403, or similar errors unrelated to an invalid key, upgrade `mcp-remote` to a version that supports Streamable HTTP and try again.
 
 ### Step 3: Use in Other MCP Clients
 
@@ -257,9 +230,9 @@ If your `mcp-remote` version supports Streamable HTTP, use **`/mcp/v2`** and pas
 
 1. Open Cursor **Settings**
 2. Open **MCP**
-3. **Add MCP Server** and paste one of the following
+3. **Add MCP Server** and paste the following
 
-**Streamable HTTP (recommended)**:
+**Streamable HTTP**:
 
 ```json
 {
@@ -275,48 +248,19 @@ If your `mcp-remote` version supports Streamable HTTP, use **`/mcp/v2`** and pas
 }
 ```
 
-**SSE (fallback)**:
-
-```json
-{
-  "mcpServers": {
-    "qieman": {
-      "url": "https://stargate.yingmi.com/mcp/sse?apiKey=your-api-key-here"
-    }
-  }
-}
-```
-
 **Notes**:
 
-- **Streamable HTTP**: put your real API Key in `headers.x-api-key`; keep `Accept` as shown
-- **SSE**: replace `your-api-key-here` in the URL
-- If Cursor asks for a transport type, choose **Streamable HTTP** (or HTTP) vs **SSE** to match your config
+- Put your real API Key in `headers.x-api-key`; keep `Accept` as shown
+- If Cursor asks for a transport type, choose **Streamable HTTP** (or HTTP) to match this config
 - Cursor download: [https://www.cursor.com/cn](https://www.cursor.com/cn)
 
 #### Cherry Studio
 
-**Streamable HTTP**: Choose **HTTP** or **Streamable HTTP** (label varies). Set the server URL to `https://stargate.yingmi.com/mcp/v2` and add custom headers **`x-api-key`** (your API Key) and **`Accept: application/json, text/event-stream`** if the app supports headers.
-
-**SSE**:
-
-1. Open Cherry Studio
-2. Connection type: **sse**
-3. Server URL:
-
-```
-https://stargate.yingmi.com/mcp/sse?apiKey=your-api-key-here
-```
+Choose **HTTP** or **Streamable HTTP** (label varies). Set the server URL to `https://stargate.yingmi.com/mcp/v2` and add custom headers **`x-api-key`** (your API Key) and **`Accept: application/json, text/event-stream`** if the app supports headers.
 
 **Notes**:
 
-- Replace `your-api-key-here` with your actual API Key
 - Cherry Studio download: [https://cherry-ai.com/](https://cherry-ai.com/)
-
-**Recommended** (optional):
-
-- Model: Volcano Engine Deepseek-v3
-- Model name: `deepseek-v3-250324`
 
 #### Windsurf / Trae / Other IDEs
 
@@ -336,19 +280,7 @@ https://stargate.yingmi.com/mcp/sse?apiKey=your-api-key-here
 }
 ```
 
-**SSE**:
-
-```json
-{
-  "mcpServers": {
-    "qieman": {
-      "url": "https://stargate.yingmi.com/mcp/sse?apiKey=your-api-key-here"
-    }
-  }
-}
-```
-
-> ⚠️ **Compatibility**: Client support for **Streamable HTTP** vs **SSE** varies. **Follow your client’s documentation and the [Qieman MCP account page](https://qieman.com/mcp/account).**
+> ⚠️ **Compatibility**: Client support for **Streamable HTTP** may vary. **Follow your client’s documentation and the [Yingmi AI Open Platform](https://ai.yingmi.com) console.**
 
 ### Usage Examples
 
@@ -372,8 +304,8 @@ Using the Campisi model, break down the total return of Huaxia Bond Fund Class A
 
 ## Technical Features
 
-- **Cloud Hosted**: No local server deployment required; connect using a **Streamable HTTP** or **SSE** endpoint URL in your client
-- **Professional & Reliable**: Based on Qieman's years of accumulated financial data and analytical models
+- **Cloud Hosted**: No local server deployment required; connect using a **Streamable HTTP** endpoint URL in your client
+- **Professional & Reliable**: Based on Yingmi Investment Advisory’s years of accumulated financial data and analytical models
 - **Real-time Updates**: Support real-time retrieval of latest fund NAV, announcements, and market news
 - **Intelligent Analysis**: Combined with AI capabilities for natural language interactive investment analysis
 - **Visualization**: Built-in chart rendering and report generation for clear results
@@ -391,7 +323,8 @@ MIT License
 ## Contact
 
 - Feedback: [wangjiaye@yingmi.cn](mailto:wangjiaye@yingmi.cn)
-- Official Website: [https://qieman.com/mcp](https://qieman.com/mcp)
+- GitHub: [Yingmi-MCP](https://github.com/yingmi-dev/Yingmi-MCP)
+- Open platform: [Yingmi AI Open Platform](https://ai.yingmi.com)
 
 ---
 
