@@ -23,11 +23,11 @@ Yingmi Investment Advisory MCP Server is an intelligent investment advisory serv
 
 ### 🔍 Fund Information Query
 
-- **Fund Details**: Batch retrieval of comprehensive fund information including NAV, performance, holdings, and fees
+- **Fund Details**: Batch retrieval of comprehensive fund information including NAV, performance, fees, and trading rules
 - **Performance Diagnostics**: Valuation level and performance attribution analysis
 - **Smart Search**: Support fuzzy matching of fund names and multi-dimensional filtering and sorting
 - **Popular Funds**: Real-time tracking of popular market funds and investment trends
-- **Announcement Query**: Timely access to fund announcements, trading rules, and limit information
+- **Trading Rule Query**: Timely access to fund trading rules and subscription/redemption limits
 
 ### 📈 Professional Investment Analysis
 
@@ -122,14 +122,13 @@ Yingmi Investment Advisory MCP Server is an intelligent investment advisory serv
 - filterStockFundByStockTurnover - Filter funds by stock turnover characteristics.
 - getBondFundWithAlertRecord - Retrieve bond funds with alert records.
 
-## Basic Info & Trading Rules (6)
+## Basic Info & Trading Rules (5)
 
 - getFundBenchmarkInfo - Retrieve benchmark definition and metadata.
 - BatchGetFundTradeRules - Batch query fund trading rules.
 - BatchGetFundTradeLimit - Batch query trading limits and constraints.
 - BatchGetFundsSplitHistory - Batch query fund split history.
 - BatchGetFundsDividendRecord - Batch query dividend distribution records.
-- BatchGetFundsHolding - Batch query fund holdings data.
 
 ## Strategy & Advisory (9)
 
@@ -143,15 +142,13 @@ Yingmi Investment Advisory MCP Server is an intelligent investment advisory serv
 - GetStrategyRiskInfo - Retrieve strategy risk profile.
 - GetFundRelatedStrategies - Retrieve advisory strategies related to target funds.
 
-## News & Announcements (7)
+## News & Content (5)
 
 - SearchFinancialNews - Search financial news.
 - SearchManagerViewpoint - Search fund manager viewpoints.
 - searchRealtimeAiAnalysis - Retrieve real-time AI analysis on market/news.
 - SearchHotTopic - Retrieve hot financial topics.
 - searchInvestAdvisorContent - Search investment-advisory content.
-- GetFundAnnouncements - Retrieve fund announcement list.
-- GetAnnouncementContent - Retrieve full announcement content.
 
 ## Investment Planning & Portfolio (4)
 
@@ -306,7 +303,7 @@ Using the Campisi model, break down the total return of Huaxia Bond Fund Class A
 
 - **Cloud Hosted**: No local server deployment required; connect using a **Streamable HTTP** endpoint URL in your client
 - **Professional & Reliable**: Based on Yingmi Investment Advisory’s years of accumulated financial data and analytical models
-- **Real-time Updates**: Support real-time retrieval of latest fund NAV, announcements, and market news
+- **Real-time Updates**: Support real-time retrieval of latest fund NAV and market news
 - **Intelligent Analysis**: Combined with AI capabilities for natural language interactive investment analysis
 - **Visualization**: Built-in chart rendering and report generation for clear results
 - **Standard Protocol**: Based on MCP protocol, compatible with Claude Desktop, Cursor, Trae and other mainstream AI tools

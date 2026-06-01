@@ -23,11 +23,11 @@
 
 ### 🔍 基金信息查询
 
-- **基金详情**：批量获取基金净值、业绩、持仓、费率等全面信息
+- **基金详情**：批量获取基金净值、业绩、费率、交易规则等全面信息
 - **业绩诊断**：估值水平、业绩归因分析
 - **智能搜索**：支持基金名称模糊匹配、多维度筛选排序
 - **热门基金**：实时追踪市场热门基金与投资趋势
-- **公告查询**：及时获取基金公告、交易规则、限额信息
+- **交易规则查询**：及时获取基金交易规则、申赎限额等关键信息
 
 ### 📈 专业投资分析
 
@@ -122,14 +122,13 @@
 - filterStockFundByStockTurnover - 股票换手率筛选基金
 - getBondFundWithAlertRecord - 查询发生净值异动的债基
 
-## 基本信息与交易规则（6）
+## 基本信息与交易规则（5）
 
 - getFundBenchmarkInfo - 业绩基准（合同基准）
 - BatchGetFundTradeRules - 基金交易规则
 - BatchGetFundTradeLimit - 基金交易限制信息
 - BatchGetFundsSplitHistory - 基金拆分记录
 - BatchGetFundsDividendRecord - 基金分红记录
-- BatchGetFundsHolding - 基金持仓
 
 ## 策略与投顾（9）
 
@@ -143,15 +142,13 @@
 - GetStrategyRiskInfo - 策略风险查询
 - GetFundRelatedStrategies - 按重仓基金筛选投顾策略
 
-## 资讯与公告（7）
+## 资讯与内容（5）
 
 - SearchFinancialNews - 财经资讯
 - SearchManagerViewpoint - 基金经理观点
 - searchRealtimeAiAnalysis - 实时资讯 AI 解读
 - SearchHotTopic - 热点财经话题榜单
 - searchInvestAdvisorContent - 搜索投顾内容
-- GetFundAnnouncements - 查询基金公告
-- GetAnnouncementContent - 获取公告内容
 
 ## 投资规划与组合（4）
 
@@ -306,7 +303,7 @@ Claude Desktop 仅支持本地 stdio 时，需使用 **Node.js / npm** 运行 `m
 
 - **云托管服务**：无需本地部署服务端代码，在客户端配置 **Streamable HTTP** 接入地址即可使用
 - **专业可靠**：基于盈米投顾多年积累的金融数据与分析模型
-- **实时更新**：支持实时获取最新基金净值、公告与市场资讯
+- **实时更新**：支持实时获取最新基金净值与市场资讯
 - **智能分析**：结合 AI 能力，提供自然语言交互式投资分析
 - **可视化**：内置图表渲染与报告生成能力，结果一目了然
 - **标准协议**：基于 MCP 协议，兼容 Claude Desktop、Cursor、Trae 等主流 AI 工具
