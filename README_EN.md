@@ -19,14 +19,14 @@ Yingmi Investment Advisory MCP Server is an intelligent investment advisory serv
 - **Holdings Diagnostics**: In-depth analysis of fund allocation rationality, correlation, and historical backtesting performance
 - **Asset Allocation Analysis**: Fund portfolio asset class penetration to identify hidden risks
 - **Correlation Analysis**: Discover correlations between funds to avoid over-concentration
-- **Backtesting Simulation**: Historical data backtesting and Monte Carlo simulation to predict future return ranges
+- **Backtesting Simulation**: Historical backtesting and Monte Carlo simulation to estimate potential return and risk ranges under different scenarios
 
 ### 🔍 Fund Information Query
 
 - **Fund Details**: Batch retrieval of comprehensive fund information including NAV, performance, fees, and trading rules
 - **Performance Diagnostics**: Valuation level and performance attribution analysis
 - **Smart Search**: Support fuzzy matching of fund names and multi-dimensional filtering and sorting
-- **Popular Funds**: Real-time tracking of popular market funds and investment trends
+- **Popular Funds**: Retrieve recently popular funds and market attention trends
 - **Trading Rule Query**: Timely access to fund trading rules and subscription/redemption limits
 
 ### 📈 Professional Investment Analysis
@@ -56,7 +56,7 @@ Yingmi Investment Advisory MCP Server is an intelligent investment advisory serv
 
 - Provide clients with professional financial planning and asset allocation services
 - Batch analyze fund products and quickly generate investment reports
-- Monitor portfolio risks in real-time and adjust investment strategies promptly
+- Query and assess portfolio risks to inform investment-strategy adjustments
 
 ### Financial Researchers
 
@@ -64,106 +64,116 @@ Yingmi Investment Advisory MCP Server is an intelligent investment advisory serv
 - Research industry allocation trends and market rotation patterns
 - Backtest investment strategies and validate investment logic
 
-## Complete Tool List
+## Complete Tool List (69)
 
-## Personal & Household Finance Analysis (5)
+### Financial Data (35)
 
-- AnalyzeAssetLiability - Analyze household assets and liabilities.
-- AnalyzeCashFlow - Analyze cash inflows, outflows, and net cash position.
-- AnalyzeFamilyMembers - Analyze family-member profile and financial roles.
-- AnalyzeFinancialIndicators - Analyze key financial health indicators.
-- AnalyzeIncomeExpense - Analyze income and expense structure.
+#### Fund Data (28)
 
-## Fund & Portfolio Analysis (8)
+- SearchFunds - Search Funds
+- BatchGetFundNavHistory - Fund NAV History
+- BatchGetFundsDetail - Batch Get Fund Details
+- GetBatchFundPerformance - Batch Get Fund Performance
+- AnalyzeFundRisk - Fund Risk Analysis
+- BatchGetFundTradeLimit - Fund Trading Limits
+- BatchGetFundsDividendRecord - Fund Dividend Records
+- fund-equity-position - Equity Position Preference
+- getFundIndustryAllocation - Industry Allocation Weights
+- BatchGetFundTradeRules - Fund Trading Rules
+- getFundTurnoverRate - Fund Turnover Rate (Rebalancing Frequency)
+- getFundBenchmarkInfo - Fund Performance Benchmark
+- getStockAllocationAndMetricsByFundCode - Valuation Metrics (PE / PB / ROE)
+- getFundBrinsonIndicator - Brinson Attribution
+- GetFundAssetClassAnalysis - Asset-Class Distribution
+- getBondIndicator - Bond Fund Risk
+- fund-recovery-ability - Drawdown Recovery Ability
+- getFundIndustryConcentration - Industry Concentration
+- getFundIndustryReturns - Industry Return Contribution
+- getFundCampisiIndicator - Campisi Attribution
+- getBondAllocationByFundCode - Bond-Type Allocation
+- getFundIndustryPreference - Fund Industry Preference
+- fund-sector-preference - Fund Sector Preference
+- getQdFundAreaAllocation - QDII Regional Allocation
+- getMarketTimingIndicator - Equity Market Timing
+- BatchGetFundsSplitHistory - Fund Split Records
+- getFundDiveCount - Bond Fund Abnormal Moves
+- getBondFundCreditRatingLevel - Bond Fund Credit-Rating Breakdown
 
-- AnalyzeFundRisk - Assess fund-level risk characteristics.
-- AnalyzePortfolioRisk - Assess risk at portfolio level.
-- DiagnoseFundPortfolio - Diagnose fund holdings composition and structure.
-- GetAssetAllocation - Analyze asset allocation breakdown.
-- GetFundAssetClassAnalysis - Perform asset-class look-through analysis.
-- GetFundsBackTest - Run portfolio/fund backtesting.
-- GetFundsCorrelation - Analyze return correlation among funds.
-- MonteCarloSimulate - Run Monte Carlo simulation scenarios.
+#### Strategy Data (7)
 
-## Fund Information Query (7)
+- GetStrategyDetails - Strategy Details
+- GetStrategyAssetClassAnalysis - Strategy Asset-Class Distribution
+- BatchGetStrategiesComposition - Batch Query Strategy Holdings
+- GetStrategyRiskInfo - Strategy Risk
+- GetStrategyBenchmark - Strategy Performance Benchmark
+- GetPortfolioNavHistory - Portfolio NAV History
+- BatchGetPoTradeComposition - Strategy Trade Composition
 
-- BatchGetFundNavHistory - Batch query historical NAV time series.
-- BatchGetFundsDetail - Batch query core fund details.
-- GetBatchFundPerformance - Batch query fund performance metrics.
-- GetFundDiagnosis - Retrieve overall fund diagnosis.
-- SearchFunds - Search funds by keyword/criteria.
-- GetPopularFund - Retrieve popular/trending funds.
-- GuessFundCode - Fuzzy-match fund code from input text.
+### Investment Research (13)
 
-## Holdings Features & Capability Metrics (7)
+#### Pre-investment Analysis (8)
 
-- fund-sector-preference - Retrieve sector preference profile.
-- fund-equity-position - Retrieve equity exposure preference.
-- fund-recovery-ability - Evaluate drawdown recovery capability.
-- getFundTurnoverRate - Retrieve turnover rate (rebalancing frequency).
-- getFundIndustryPreference - Retrieve industry preference profile.
-- getFundIndustryAllocation - Retrieve industry allocation weights.
-- getFundIndustryConcentration - Retrieve industry concentration level.
+- GetFundDiagnosis - Fund Diagnosis
+- GetPopularFund - Recent Popular Funds
+- GetLatestQuotations - Market Thermometer
+- GetFundRelatedStrategies - Filter Advisory Strategies by Overweight Fund
+- getBondFundWithAlertRecord - Bond Funds with NAV Alerts
+- filterBondFundByBondType - Filter Funds by Bond-Type Style
+- filterBondFundByCreditRating - Filter Funds by Credit Rating
+- filterStockFundByStockTurnover - Filter Funds by Stock Turnover
 
-## Holdings / Attribution / Risk Deep-Dive (14)
+#### Calculation (2)
 
-- getQdFundAreaAllocation - Retrieve QDII geographic allocation.
-- getBondFundCreditRatingLevel - Retrieve bond credit-rating distribution.
-- getBondAllocationByFundCode - Retrieve bond-type allocation mix.
-- getStockAllocationAndMetricsByFundCode - Retrieve equity holdings and valuation/quality metrics.
-- getFundIndustryReturns - Retrieve industry-level return contribution.
-- getFundBrinsonIndicator - Retrieve Brinson attribution indicators.
-- getMarketTimingIndicator - Retrieve market-timing indicators.
-- getFundCampisiIndicator - Retrieve Campisi attribution indicators.
-- getBondIndicator - Retrieve bond risk indicators (e.g., leverage, duration, concentration).
-- getFundDiveCount - Retrieve abnormal-move/event count for bond funds.
-- filterBondFundByCreditRating - Filter bond funds by credit-rating criteria.
-- filterBondFundByBondType - Filter bond funds by bond-type style.
-- filterStockFundByStockTurnover - Filter funds by stock turnover characteristics.
-- getBondFundWithAlertRecord - Retrieve bond funds with alert records.
+- GetFundsBackTest - Backtest Analysis
+- MonteCarloSimulate - Portfolio Expected-Return Simulation (Monte Carlo)
 
-## Basic Info & Trading Rules (5)
+#### Post-investment Diagnosis (3)
 
-- getFundBenchmarkInfo - Retrieve benchmark definition and metadata.
-- BatchGetFundTradeRules - Batch query fund trading rules.
-- BatchGetFundTradeLimit - Batch query trading limits and constraints.
-- BatchGetFundsSplitHistory - Batch query fund split history.
-- BatchGetFundsDividendRecord - Batch query dividend distribution records.
+- AnalyzePortfolioRisk - Post-investment Risk Analysis
+- GetFundsCorrelation - Fund Correlation Analysis
+- GetAssetAllocation - Asset Allocation Analysis
 
-## Strategy & Advisory (9)
+### General Services (5)
 
-- GetStrategyDetails - Retrieve strategy details.
-- GetStrategyBenchmark - Retrieve strategy benchmark.
-- GetStrategyAssetClassAnalysis - Analyze strategy asset-class distribution.
-- BatchGetStrategiesComposition - Batch query strategy holdings composition.
-- BatchGetPoTradeComposition - Retrieve strategy trade composition.
-- StrategySearchByKeyword - Search strategies by keyword.
-- BatchGetStrategyRiskInfo - Batch query strategy risk profiles.
-- GetStrategyRiskInfo - Retrieve strategy risk profile.
-- GetFundRelatedStrategies - Retrieve advisory strategies related to target funds.
+#### Financial Tools (1)
 
-## News & Content (5)
+- GuessFundCode - Fuzzy Fund-Code Matching
 
-- SearchFinancialNews - Search financial news.
-- SearchManagerViewpoint - Search fund manager viewpoints.
-- searchRealtimeAiAnalysis - Retrieve real-time AI analysis on market/news.
-- SearchHotTopic - Retrieve hot financial topics.
-- searchInvestAdvisorContent - Search investment-advisory content.
+#### Common Tools (4)
 
-## Investment Planning & Portfolio (4)
+- GetCurrentTime - Get Current Time
+- RenderEchart - ECharts Chart Rendering
+- RenderHtmlToPdf - HTML to PDF
+- GetTxnDayRange - Trading-Day Query
 
-- GetAssetAllocationPlan - Generate/retrieve asset-allocation plan.
-- GetCompositeModel - Generate/retrieve composite investment model.
-- AnalyzeInvestmentPerformance - Evaluate investment-plan performance.
-- GetPortfolioNavHistory - Retrieve portfolio NAV history.
+### Investment Advisory Services (11)
 
-## Market & Utility Tools (5)
+#### Investment Advisor (11)
 
-- GetLatestQuotations - Retrieve latest market quotes/market thermometer.
-- RenderEchart - Render ECharts configuration/output.
-- RenderHtmlToPdf - Convert HTML report to PDF.
-- GetCurrentTime - Retrieve current system time.
-- GetTxnDayRange - Query trading-day range.
+- GetAssetAllocationPlan - Get Asset Allocation Plan
+- StrategySearchByKeyword - Strategy Keyword Search
+- AnalyzeFinancialIndicators - Financial Condition Analysis
+- DiagnoseFundPortfolio - Account Diagnosis
+- GetCompositeModel - Get Fund Investment Plan
+- BatchGetStrategyRiskInfo - Strategy Risk Matching
+- AnalyzeInvestmentPerformance - Investment Plan Performance Analysis
+- AnalyzeFamilyMembers - Household Structure Analysis
+- AnalyzeCashFlow - Cash Flow Analysis and Financial Planning
+- AnalyzeAssetLiability - Asset-Liability Analysis
+- AnalyzeIncomeExpense - Income and Expense Analysis
+
+### Investment Advisory Content (5)
+
+#### Public Content (2)
+
+- SearchFinancialNews - Financial News
+- SearchHotTopic - Hot Financial Topics
+
+#### Yingmi Original Content (3)
+
+- SearchManagerViewpoint - Fund Manager Viewpoints
+- searchInvestAdvisorContent - Search Advisory Content
+- searchRealtimeAiAnalysis - Real-time News AI Interpretation
 
 ## Quick Start
 
@@ -183,13 +193,40 @@ Yingmi Investment Advisory MCP Server uses a **cloud-hosted model**. No local se
 
 > 💡 **Tip**: For the latest guidance and key management, see the [Yingmi AI Open Platform](https://ai.yingmi.com) and the [Yingmi AI Open Platform — Personal Center](https://ai.yingmi.com/mcp/account).
 
-### Step 2: Configure in Claude Desktop
+### Step 2: Configure in Claude Code
 
-When Claude Desktop only supports local **stdio**, use **Node.js / npm** to run **`mcp-remote`** with **Streamable HTTP** against the remote server.
+Claude Code supports remote HTTP MCP servers natively, so `mcp-remote` is not required. The recommended setup is a `.mcp.json` file in the project root with the API Key supplied through an environment variable:
 
-#### Streamable HTTP + mcp-remote
+```json
+{
+  "mcpServers": {
+    "qieman": {
+      "type": "http",
+      "url": "https://stargate.yingmi.com/mcp/v2",
+      "headers": {
+        "x-api-key": "${YINGMI_API_KEY}",
+        "Accept": "application/json, text/event-stream"
+      }
+    }
+  }
+}
+```
 
-Add to your Claude Desktop configuration file (your `mcp-remote` version must support Streamable HTTP):
+Set the `YINGMI_API_KEY` environment variable before use, then restart Claude Code. You can also add the server directly from the CLI:
+
+```powershell
+claude mcp add --transport http --scope user qieman https://stargate.yingmi.com/mcp/v2 --header "x-api-key: your-api-key-here" --header "Accept: application/json, text/event-stream"
+```
+
+> The CLI form writes the request headers to the Claude Code configuration. Use the `.mcp.json` + environment-variable form above if you do not want the Key stored in plaintext. Run `claude mcp list`, or enter `/mcp` in Claude Code, to verify the connection.
+
+### Step 3: Configure in Claude Desktop
+
+Claude Desktop **Connectors** are intended for remote MCP servers that support OAuth or require no authentication. The current Yingmi MCP endpoint requires a custom `x-api-key` header, so it cannot be connected by entering only its URL in Connectors. Use `mcp-remote` as a local stdio compatibility bridge. If the Yingmi AI Open Platform later provides an OAuth-compatible Connector URL, follow the console guidance and add it through **Settings → Connectors → Add custom connector** instead.
+
+#### Claude Desktop + mcp-remote (compatibility option)
+
+Add the following to your Claude Desktop configuration file (Node.js is required, and your `mcp-remote` version must support Streamable HTTP):
 
 ```json
 {
@@ -203,10 +240,14 @@ Add to your Claude Desktop configuration file (your `mcp-remote` version must su
         "--transport",
         "http-only",
         "--header",
-        "x-api-key:your-api-key-here",
+        "x-api-key:${YINGMI_API_KEY}",
         "--header",
-        "Accept:application/json, text/event-stream"
-      ]
+        "Accept:${MCP_ACCEPT}"
+      ],
+      "env": {
+        "YINGMI_API_KEY": "your-api-key-here",
+        "MCP_ACCEPT": "application/json, text/event-stream"
+      }
     }
   }
 }
@@ -214,12 +255,15 @@ Add to your Claude Desktop configuration file (your `mcp-remote` version must su
 
 **Configuration notes**:
 
+- This registers a local stdio bridge process; it does not register a remote HTTP server directly in `claude_desktop_config.json`
 - `mcp-remote` bridges the remote Streamable HTTP MCP server to local stdio for Claude Desktop
-- Replace `your-api-key-here` in the `x-api-key` header with your real API Key
+- Replace `your-api-key-here` in `env.YINGMI_API_KEY` with your real API Key
+- On Windows, the header arguments contain no spaces; complete values containing spaces are injected through `env` so Claude Desktop does not split them when invoking `npx`
+- This compatibility setup stores the Key in the local Claude Desktop configuration file. Do not commit that file to Git, and restrict access to it
 
-> On **Windows**, Claude Desktop may mishandle spaces inside `--header` values; use an environment variable in the header value per `mcp-remote` docs. If you see OAuth discovery, HTTP 403, or similar errors unrelated to an invalid key, upgrade `mcp-remote` to a version that supports Streamable HTTP and try again.
+> Restart Claude Desktop after saving. If the connection fails, verify the API Key and endpoint first, then upgrade `mcp-remote` and inspect the Claude Desktop MCP logs.
 
-### Step 3: Use in Other MCP Clients
+### Step 4: Use in Other MCP Clients
 
 #### Cursor IDE
 
@@ -251,13 +295,31 @@ Add to your Claude Desktop configuration file (your `mcp-remote` version must su
 - If Cursor asks for a transport type, choose **Streamable HTTP** (or HTTP) to match this config
 - Cursor download: [https://www.cursor.com/cn](https://www.cursor.com/cn)
 
+#### Codex (CLI / IDE)
+
+Codex CLI and the IDE extension read remote MCP servers from `~/.codex/config.toml` (on Windows: `%USERPROFILE%\.codex\config.toml`). ChatGPT on the web does not read this local configuration.
+
+```toml
+[mcp_servers.qieman]
+url = "https://stargate.yingmi.com/mcp/v2"
+env_http_headers = { "x-api-key" = "YINGMI_API_KEY" }
+http_headers = { "Accept" = "application/json, text/event-stream" }
+```
+
+**Notes**:
+
+- Set the `YINGMI_API_KEY` environment variable before use, then restart Codex
+- The `env_http_headers` value is the environment-variable name, not the API Key itself; do not also put a plaintext `x-api-key` in `http_headers`
+- Config reference: [Codex config.toml](https://learn.chatgpt.com/docs/config-file/config-reference)
+- You can also run `codex mcp add qieman --url https://stargate.yingmi.com/mcp/v2`, then add the headers above to `config.toml`
+
 #### Cherry Studio
 
 Choose **HTTP** or **Streamable HTTP** (label varies). Set the server URL to `https://stargate.yingmi.com/mcp/v2` and add custom headers **`x-api-key`** (your API Key) and **`Accept: application/json, text/event-stream`** if the app supports headers.
 
 **Notes**:
 
-- Cherry Studio download: [https://cherry-ai.com/](https://cherry-ai.com/)
+- Cherry Studio download: [https://www.cherryai.com.cn/](https://www.cherryai.com.cn/)
 
 #### Windsurf / Trae / Other IDEs
 
@@ -303,7 +365,7 @@ Using the Campisi model, break down the total return of Huaxia Bond Fund Class A
 
 - **Cloud Hosted**: No local server deployment required; connect using a **Streamable HTTP** endpoint URL in your client
 - **Professional & Reliable**: Based on Yingmi Investment Advisory’s years of accumulated financial data and analytical models
-- **Real-time Updates**: Support real-time retrieval of latest fund NAV and market news
+- **Data Updates**: Retrieve the latest fund NAV and market news
 - **Intelligent Analysis**: Combined with AI capabilities for natural language interactive investment analysis
 - **Visualization**: Built-in chart rendering and report generation for clear results
 - **Standard Protocol**: Based on MCP protocol, compatible with Claude Desktop, Cursor, Trae and other mainstream AI tools
